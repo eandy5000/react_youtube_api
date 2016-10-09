@@ -8,8 +8,23 @@ import React from 'react';
 
 //class based component
 class SearchBar extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {term: ''};
+    }
+//you have to bind 'this' to an external function      
     render() {
-        return <input />;
+        return (
+            <div>
+                <input onChange={this.onInputChange.bind(this)} />
+                the Value: {this.state.term}
+            </div>    
+        );
+    }
+
+    onInputChange(event) {
+       this.setState({term: event.target.value});
     }
 
 
