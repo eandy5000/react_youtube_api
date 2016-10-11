@@ -5,6 +5,7 @@ import YTSearch from 'youtube-api-search';
 
 //components
 import SearchBar from '../components/search_bar';
+import VideoList from '../components/video_list';
 
 
 const API_KEY = "AIzaSyAGVmHLVNgrQ4MoQKpf8RggfawNZz-NEbQ";
@@ -18,8 +19,9 @@ class App extends Component {
 
         this.state = {videos: [] };
 
-        YTSearch({key: API_KEY, term: 'surfboard'}, (data) => {
-            this.setState({videos : data});
+        YTSearch({key: API_KEY, term: 'surfboard'}, (videos) => {
+            //alternate es6 syntax used in many examples this.setState({videos})
+            this.setState({videos : videos});
         });
     }
 
@@ -27,6 +29,7 @@ class App extends Component {
         return (
             <div>
                 <SearchBar />
+                <VideoList videos={this.state.videos} />
             </div>
         );
     }
