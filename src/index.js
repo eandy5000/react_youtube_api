@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import _ from 'lodash'
 import ReactDOM from 'react-dom'
 import SECRET from '../secrets/secret'
 import SearchBar from '../components/search_bar'
@@ -15,27 +16,31 @@ class App extends Component {
             videos: [],
             selectedVideo: null
         }
+        this.videoSearch('surfboards')
+    }
 
-    YTSearch({
+    videoSearch(term) {
+            YTSearch({
         key: SECRET,
-        term: 'surfboards'
+        term: term
     }, data => {
         this.setState(
             {
                 videos: data,
                 selectedVideo: data[0]
             })
-    })
-
-        
+        })  
     }
 
 
-
     render(){
+        const videoSearch = _.debounce(term => {
+            return this.videoSearch(term)
+        }, 300)
+
         return (
             <div>
-                <SearchBar />
+                <SearchBar onSearchTermChange={videoSearch} />
                 <VideoDetail video={this.state.selectedVideo} />
                 <VideoList 
                     onVideoSelect={selectedVideo => this.setState({ selectedVideo })}
