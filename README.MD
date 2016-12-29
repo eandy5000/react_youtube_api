@@ -1,5 +1,5 @@
 # Basic React Project 
 
-## rebuilding project on this branch
+## --rebuilding project on this branch-- Now on master
 
 React project configured with Webpack 
